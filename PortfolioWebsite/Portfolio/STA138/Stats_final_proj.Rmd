@@ -1,0 +1,293 @@
+---
+title: "Stats138 Project#1"
+author: "Ruriko_Imai & Emily_Ng"
+date: "2/9/2017"
+output:
+  html_document: default
+---
+###Part 1
+
+*Reading in the Trial data.*
+```{r}
+Trial = read.csv("/Users/rurikoimai/Downloads/Trial.csv", header = TRUE)
+dim(Trial)
+names(Trial)
+```
+Dimension of this table is 367 by 3. That means the sample size n = 367. The 3 varialbes are Success, Group, and Year.
+
+*Constructing tables for Group vs. Success.*
+```{r}
+table1 = table(Trial$Group, Trial$Success)
+table1
+```
+
+*Mosaic Plot of the Trial data set*
+```{r}
+mosaicplot(table1)
+```
+Looking at the mosaic plot, the proportion of success group for Group B is slightly less than Group A. Is the difference significant?
+
+*Estimate the probability of a successful treatment overall.*
+```{r}
+sum1 = colSums(table1) 
+```
+Success, y, = 259
+
+Since the sample size, n = 367 and the number of success, y = 259 for the overall data, the number of success divided by the sample size (y/n) will estimate the probability of a successful treatment overall.
+
+```{r}
+y = 259
+n = 367
+y/n # = 0.7057221
+```
+The estimate of the probability of a successful treatment overall is 0.7057221.
+
+*Hypothesis Test for a successful treatment overall using difference in proportion*
+```
+H0: The probability of success for Group A is equal to the probability of success fo Group B.
+Ha: The probability of success for Group A is not equal to the probability of success fo Group B.
+```
+*P-value for the hypothesis test*
+```{r}
+alpha = 0.05
+
+prop.test(table1[,2],rowSums(table1), correct=FALSE, conf.level = 1-alpha)
+prop.test(table1[,2],rowSums(table1), correct=FALSE, conf.level = 1-alpha)$conf.int
+```
+Since the p-value is 0.7927, p-value > alpha, we fail to reject the Null hypothesis. Therefore, we conclude that the probability of success for Group A is not equal to the probability of success fo Group B.
+
+*C.I. for Proportion Difference, Marginal Table*
+```{r}
+n = rowSums(table1)
+p1 = table1[1,2]/n[1] #probability of success for Group A
+p2 = table1[2,2]/n[2] #probability of success for Group B
+
+z = qnorm(1-0.05/2) 
+
+(p1-p2) - z*sqrt(p1*(1-p1)/n[1] + p2*(1-p2)/n[2])
+(p1-p2) + z*sqrt(p1*(1-p1)/n[1] + p2*(1-p2)/n[2])
+```
+Since the C.I. includes 0, we can conclude that the groups and treatments are independent of each other. 
+
+*Estimate the probability of a successful treatment, comparing only groups.*
+
+Split the table by group A and B.
+```{r}
+groups = split(Trial, Trial$Group) #Group A vs. B
+groupA = table(groups$A$Year, groups$A$Success)
+```
+
+Finding the successes and sample sizes in group A. 
+```{r}
+colSums(groupA)
+y_A = 131 
+n_A = 131 + 53
+y_A/n_A # = 0.7119565
+```
+
+The estimate of the probability of a successful treatment for Group A is 0.7119565. 
+
+Table for group B. 
+```{r}
+groupB = table(groups$B$Year, groups$B$Success)
+```
+
+Finding the successes and sample sizes in group B. 
+
+```{r}
+colSums(groupB)
+y_B = 128
+n_B = 128 + 55
+y_B/n_B # = 0.6994536
+```
+
+The estimate of the probability of a successful treatment for Group B is 0.6994536.
+
+*Estimate the probability of a successful treatment, comparing only years.*
+
+Data split by the variable, year.
+```{r}
+split.data = split(Trial, Trial$Year) #split by Year
+sub.table1 = table(split.data$One$Group, split.data$One$Success) #split by year 1
+```
+
+*Year 1*
+```{r}
+colSums(sub.table1)
+y_one = 169
+n_one = 169 + 53
+y_one/n_one # = 0.7612613
+```
+The estimate of the probability for a successful treatment for year 1 is 0.7612613.
+
+*Year 2*
+```{r}
+sub.table2 = table(split.data$Two$Group, split.data$Two$Success) #by year 2
+colSums(sub.table2)
+y_two = 90
+n_two = 90 + 55
+y_two/n_two # = 0.6206897
+```
+The estimate of the probability for a successful treatment for year 2 is 0.6206897.
+
+Assess the relationship between Group and Success, with and without information from year.
+
+*Partial tables with years.* 
+```{r}
+split.data = split(Trial, Trial$Year) #split by Year
+```
+
+*Year One*
+```{r}
+sub.table1 = table(split.data$One$Group, split.data$One$Success) #year 1
+sub.table1
+barplot(sub.table1, main = "Success in treatment for Year One", beside = TRUE, legend = rownames(sub.table1))
+```
+
+*Year Two*
+```{r}
+sub.table2 = table(split.data$Two$Group, split.data$Two$Success) #year 2
+sub.table2
+barplot(sub.table2, main = "Success in treatment for Year Two", beside = TRUE, legend = rownames(sub.table2))
+```
+
+*Hypothesis Test for Partial tables*
+```{r}
+alpha = 0.05
+
+#Year One
+prop.test(sub.table1[,2],rowSums(sub.table1), correct=FALSE, conf.level = 1-alpha)
+prop.test(sub.table1[,2],rowSums(sub.table1), correct=FALSE, conf.level = 1-alpha)$conf.int
+
+#Year Two
+prop.test(sub.table2[,2],rowSums(sub.table2), correct=FALSE, conf.level = 1-alpha)
+prop.test(sub.table2[,2],rowSums(sub.table2), correct=FALSE, conf.level = 1-alpha)$conf.int
+```
+
+
+*C.I. for Proportion Difference, Partial Table*
+```{r}
+z = qnorm(1-0.05/2) 
+
+#Year One
+n = rowSums(sub.table1)
+p1 = sub.table1[1,2]/n[1] #probability of success for Group A
+p2 = sub.table1[2,2]/n[2] #probability of success for Group B
+
+(p1-p2) - z*sqrt(p1*(1-p1)/n[1] + p2*(1-p2)/n[2])
+(p1-p2) + z*sqrt(p1*(1-p1)/n[1] + p2*(1-p2)/n[2])
+
+#Year Two
+n = rowSums(sub.table2)
+p1 = sub.table2[1,2]/n[1] #probability of success for Group A
+p2 = sub.table2[2,2]/n[2] #probability of success for Group B
+
+(p1-p2) - z*sqrt(p1*(1-p1)/n[1] + p2*(1-p2)/n[2])
+(p1-p2) + z*sqrt(p1*(1-p1)/n[1] + p2*(1-p2)/n[2])
+```
+
+
+*Marginal Tables without the confounding variable, year.*
+```{r}
+table1 #marginal table 
+```
+
+###Part 2
+
+*Loading data and creating a table.*
+```{r}
+horror = read.csv('/Users/rurikoimai/Downloads/horror.csv', header = TRUE) #load csv file
+dim(horror) #dimension of the horror data
+table2 =table(horror) #create a table
+table2
+```
+
+```{r}
+mosaicplot(table2)
+```
+In the mosaic plot above, we can observe that the proportions for BFT, Other, and Shot under Death type are not proportional amongst the Gender. The question to ask is then, is there a significant difference on the Death type depending on the Gender?
+
+###Null and Alternative Hypothesis
+
+```
+H0: Gender and Death are independent.
+Ha: Gender and Death are dependent. 
+```
+
+###Pearson Test for Independence
+```{r}
+pearson.test = chisq.test(table2, correct = FALSE)
+pearson.test
+```
+The chi-squared test statistic is 24.307, with a p-value of 2.155e-05. Since 24.307 is a relatively large number and p-value < alpha=0.05, we reject the null hypothesis and conclude that the variables are dependent.
+
+(is the alpha 0.05 or the corrected alpha?)
+
+*Expected Counts*
+```{r}
+pearson.test$expected
+```
+The expected count in each cell for the null hypothesis is not the same as observed, the difference may be significant. 
+
+```{r}
+barplot(table2, main = "Death Type by Gender", beside = TRUE, legend = rownames(table2))
+```
+
+
+*Pearson Residuals*
+```{r}
+pearson.test$residuals
+```
+The residuals of each cell indicates the distance each observation is from the null. Other and Shot are currently indicates that they are further from null, however, since the residual is not standardized, let us take a look at the standardized residuals. 
+
+*Standardized Residuals*
+```{r}
+pearson.test$stdres
+```
+The standardized residual is under the curve, ~ Normal(0,1). Since |rij| > 3 is inlikely, and we observe that Other and Shot under the Death type contributes the most for dependency. Therefore, we reject the null hypothesis and conclude that Gender and the type of Death is dependent of one another. 
+
+###Confidence Intervals using differnce in proportions.
+
+*Probabilities of Death type given Gender.*
+```{r}
+n = rowSums(table2)
+p1 = table2[1,]/n[1]
+p1
+p2 = table2[2,]/n[2]
+p2
+```
+
+*Adjusted Zs*
+```{r}
+z.a = qnorm(1-0.05/(2*4))
+z.a
+```
+
+*C.I. for proportion difference*
+```{r}
+(p1-p2) - z.a*sqrt(p1*(1-p1)/n[1] + p2*(1-p2)/n[2])
+(p1-p2) + z.a*sqrt(p1*(1-p1)/n[1] + p2*(1-p2)/n[2])
+```
+Since the C.I. for BFT includes 0, Gender and BFT is independent.
+Since the C.I. for Other does not include 0, Gender and Other is dependent.
+Since the C.I. for Shot does not include 0, Gender and Shot is dependent. 
+Since the C.I. for Stabbed inludes 0, Gender and Stabbed is independent. 
+
+*P-values for the HT*
+```{r}
+alpha = 0.05
+g = 4
+prop.test(table2[,1],rowSums(table2), correct=FALSE, conf.level = 1-alpha/g)
+prop.test(table2[,1],rowSums(table2), correct=FALSE, conf.level = 1-alpha/g)$conf.int
+
+prop.test(table2[,2],rowSums(table2), correct=FALSE, conf.level = 1-alpha/g)
+prop.test(table2[,2],rowSums(table2), correct=FALSE, conf.level = 1-alpha/g)$conf.int
+
+prop.test(table2[,3],rowSums(table2), correct=FALSE, conf.level = 1-alpha/g)
+prop.test(table2[,3],rowSums(table2), correct=FALSE, conf.level = 1-alpha/g)$conf.int
+
+prop.test(table2[,4],rowSums(table2), correct=FALSE, conf.level = 1-alpha/g)
+prop.test(table2[,4],rowSums(table2), correct=FALSE, conf.level = 1-alpha/g)$conf.int
+
+```
+

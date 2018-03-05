@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>RurikoImai</title>
+    <meta charset="utf-8">
+
+    <script type="text/javascript" src="../javascript/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="../javascript/main.js"></script>
+
+    <link rel="stylesheet" href="../css/main.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<div class="container-fluid">
+ <!-- Hamburger Menu -->
+    <div id="hamburger-menu" class="container top-right-menu" onclick="hamburgerToggle(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper" class="top-right-menu hide-sidebar">
+        <ul class="sidebar-nav">
+            <li>
+                <a href="#top" onclick=$("#hamburger-menu").click();>Home</a>
+            </li>
+            <li>
+                <a href="#about-me" onclick=$("#hamburger-menu").click();>About Me</a>
+            </li>
+            <li>
+                <a href="#resume" onclick=$("#hamburger-menu").click();>Resume</a>
+            </li>
+            <li>
+                <a href="#portfolio" onclick=$("#hamburger-menu").click();>Portfolio</a>
+            </li>
+            <li>
+                <a href="#other-websites" onclick=$("#hamburger-menu").click();>Other Websites</a>
+            </li>
+            <li>
+                <a href="#contact" onclick=$("#hamburger-menu").click();>Contact</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Home -->
+    <header id="top">
+        <h1 class="centered">Ruriko Imai</h1>
+        <h4 class="centered">University of California, Davis <br> Bachelor of Science, Applied Statistics <br> Anticipated June 2018</h4>
+    </header>
+
+    <!-- About Me -->
+    <section id="about-me">
+        <div class="medium-width">
+            <h2 class="centered">About Me</h2>
+                <div class ="images">
+                        <img id="about-image-1"><img id="about-image-2">
+                </div>
+                <p>I am a third-year undergraduate student at the University of California, Davis,
+                    majoring in Applied Statistics with an emphasis in Psychology and minoring in Chinese.<br>
+                    My anticipated graduation date is in June 2018.<br>
+                    <br>
+                    Throughout my college career, I discovered my passion for statistics and
+                    fell in love with the idea of getting hold of this vast data our society
+                    has to offer and analyzing the given information to make some sense out of it.<br>
+                    <br>
+                    My interests are driven towards the fields of data analysts, data mining, and data
+                    science in particular. Statistics is a rapidly developing field, and with more access
+                    to raw data found all over the world, and my dream is to be able to mine them and
+                    analyze it to get a better understanding of this world, whatever the subject matter is.<br>
+                    <br>
+                    Outside of school, I am currently interning at an IT company located in Tokyo, Japan.
+                    I work remotely from the U.S. with an intern partner in Japan to build a website using html,
+                    css, python, django, javascript, and sql, representing the Japan trade statistics.
+                    Through this internship, I am hoping to attain more knowledge in programming as well
+                    as hands on experience analyzing real world data.<br>
+                    <br>
+                    Where I am from:<br>
+                    I was born in Japan, grew up in Hawaii, and moved to California to attend UC Davis.
+                    Besides my passion for statistics, I am a public relations officer for the Japanese
+                    Language and Culture Connection Club (JLCC) and a travel coordinator officer for Boxing club.
+                    I am also an athlete who competed for boxing. These extra-curricular activities help shape me
+                    as a person and builds me to become a strong, independent person.<br>
+                    <br>
+                    Hobbies:<br>
+                    As you might have guessed from reading the above paragraph,  I love boxing and exercising in general.
+                    Besides boxing, I have also started bouldering. I love reading books (classics, fiction, non-fiction,
+                    fantasy, etc.) but I try not to read when school is in session to prevent myself from getting to immersed
+                    in those books. I also love traveling and have some amazing stories both exhilarating and somewhat scary stories,
+                    which I would love to share with you, if you are interested. <br>
+                    <br>
+                    Goals:<br>
+                    My goal at the present is to soak in as much statistical knowledge as possible so I would actually be able
+                    to apply my knowledge after I graduate. Therefore, I am reaching out to anyone who is willing to help me gain
+                    more knowledge and experience! Thank you.<br>
+                </p>
+        </div>
+    </section>
+
+    <!-- Resume -->
+    <section id="resume">
+        <div class="large-width">
+            <h2 class="centered">Resume</h2>
+            <a href="../Resume/RurikoImaiResume.pdf"> <img> <br> View or download PDF</a>
+            <br>
+            <br>
+            <a href="../Resume/履歴書：今井　瑠璃子.pdf">履歴書(Japanese Resume)</a>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio">
+        <div class="medium-width">
+            <h2 class="centered">Portfolio</h2>
+            <h4>R</h4>
+            <h5>Analysis of Categorical Data</h5>
+                <p>
+                    <a href="../Portfolio/STA138/STA138Proj1.pdf">Treatment & Horror Dataset</a>: Simpson's Paradox & Multinomial Distribution<br>
+                    <a href="../Portfolio/STA138/STA138Proj2.pdf">Car & Trial Dataset</a>: Logistic Regression & Log-Linear Models<br>
+                    <a href="../Portfolio/STA138/STA138Proj3.pdf">Socioeconomic Class & Birth Rate Dataset</a>: Multinomial Logistic & Logistic Regression<br>
+                </p>
+            <h5>Analysis of Non-Parametric</h5>
+                <p>
+                    <a href="../Portfolio/STA104/STA104Proj1.pdf">Drug & Depression Dataset</a>:Mann-Whitney & Krukal-Wallis Tests<br>
+                </p>
+            <h5>Statistical Data Science</h5>
+                <p>
+                    <a href="../Portfolio/STA141a/STA141a.pdf">CA University Spendings</a>:Statistical Analysis & Mapping<br>
+                    <a href="../Portfolio/STA141a/map_code/FinalStats141Aproject_map_code.R">Code</a>:Code for the Map<br>
+                    <a href="../Portfolio/STA141a/data/College Codes.pdf">Data_1</a>:College Codes<br>
+                    <a href="../Portfolio/STA141a/data/college_regions.csv">Data_2</a>:College Regions<br>
+                    <a href="../Portfolio/STA141a/data/FinalConstData.csv">Data_3</a>:Raw Dataset<br>
+                </p>
+            <h5>Statistical Data Analysis for Psych</h5>
+                <p>
+                    <a href="../Portfolio/PSC103ab/PSC103A_FinalProject.docx">Contribution To Higher Salary</a>:Hypothesis Test<br>
+                    <!--<a href="../static/Portfolio/PSC103ab/PSC103B_FinalProject.docx">Name2</a>:Discription2<br>-->
+                </p>
+            <h4>Python</h4>
+            <h5>Big Data & High Performance Statistical Computing</h5>
+                <p>
+                    <a href="../Portfolio/STA141c/Report.pdf">Text Preprocessing & its Accuracy</a>:Report of the Results<br>
+                    <a href="../Portfolio/STA141c/Preprocessing.py">Code_1</a>:Preprocessing<br>
+                    <a href="../Portfolio/STA141c/ComputeScore.py">Code_2</a>:Computing Score for Matching Questions<br>
+                    <a href="../Portfolio/STA141c/ComputeAccuracy.py">Code_3</a>:Computing Accuracy of the Scores<br>
+                    <a href="../Portfolio/STA141c/AccuracyRemoveStops.py">Code_4</a>:Removing Stop Words<br>
+                    <a href="../Portfolio/STA141c/BestWeight.py">Code_5</a>:Report of the Results<br>
+                    <a href="../Portfolio/STA141c/training.csv">Data_1</a>:Training Dataset<br>
+                    <a href="../Portfolio/STA141c/validation.csv">Data_2</a>:Validation Dataset<br>
+                    <a href="../Portfolio/STA141c/README.txt">README</a>:Additional Info<br>
+
+                </p>
+            <h5>Internship Project</h5>
+                <p>Yet to come...</p>
+        </div>
+  </section>
+
+  <!--Other Websites-->
+  <section id="other-websites">
+      <h2 class="centered">
+          Other Websites
+      </h2>
+      <p>
+          <i class="github-icon"></i> <a href="https://github.com/imaination">Github</a>
+      </p>
+      <p>
+          <i class="linkedin-icon"></i> <a href="https://www.linkedin.com/in/ruriko-imai-247158118/">LinkedIn</a>
+      </p>
+  </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2 class="centered">
+            Contact
+        </h2>
+        <p>
+            &#9993; <a href="mailto:raimai@ucdavis.edu">raimai@ucdavis.edu</a>
+        </p>
+    </section>
+
+
+</div>
+</body>
+</html>
